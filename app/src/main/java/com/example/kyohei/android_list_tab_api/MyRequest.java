@@ -1,5 +1,7 @@
 package com.example.kyohei.android_list_tab_api;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,12 +28,12 @@ public class MyRequest {
 
     public JsonObjectRequest MyJsonObjectRequest(final String category, int page,
                                                  final RequestListener.SuccesseListener successeListener,
-                                                 final RequestListener.FailuerListner failuerListner) {
+                                                 final RequestListener.FailureListener failureListener) {
         return new JsonObjectRequest(
             // HTTPメソッド名
             Request.Method.GET,
             // リクエスト先のURL
-            "http://api.dribbble.com/shots/" + category + "?page=" + page,
+            "https://api.dribbble.com/shots/" + category + "?page=" + page,
             // リクエストパラメータ
             null,
             // 通信成功時のリスナー
@@ -39,7 +41,9 @@ public class MyRequest {
                 @Override
                 public void onResponse(JSONObject response) {
                     // 通信成功時の処理
-//                    ShotsParser.parseShotsList(response, category);
+                    ShotsParser.parseShotsList(response, category);
+                    Log.d("mylog", response.toString());
+                    Log.d("mylog", category);
                     successeListener.onResponse(response);
                 }
             },
@@ -49,7 +53,7 @@ public class MyRequest {
                 public void onErrorResponse(VolleyError error) {
                     // 通信失敗時の処理
                     VolleyLog.d(TAG, "Error: " + error.getMessage());
-                    failuerListner.onErrorResponse(error);
+                    failureListener.onErrorResponse(error);
                 }
             }
         );

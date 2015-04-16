@@ -2,9 +2,9 @@ package com.example.kyohei.android_list_tab_api;
 
 import android.app.Application;
 import android.text.TextUtils;
-//import com.activeandroid.ActiveAndroid;
-//import android.activeandroid.Configuration;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Configuration;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -27,14 +27,18 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        Configuration.Builder builder = new Configuration.Builder(getBaseContext());
-//        builder.setCacheSize(1024*1024*4);
+        Configuration.Builder builder = new Configuration.Builder(getBaseContext());
+        builder.setCacheSize(1024*1024*4);
+        builder.setDatabaseName("sqlite.db");
+        builder.setDatabaseVersion(1);
+        ActiveAndroid.initialize(builder.create(), true);
         mInstance = this;
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
+        ActiveAndroid.dispose();
     }
 
     public static synchronized AppController getInstance() {
@@ -58,6 +62,11 @@ public class AppController extends Application {
 
     public <T> void addToRequestQueue(Request<T> req, String tag) {
         req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        getRequestQueue().add(req);
+    }
+
+    public <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
         getRequestQueue().add(req);
     }
 

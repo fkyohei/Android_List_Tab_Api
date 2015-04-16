@@ -11,7 +11,7 @@ public class RequestListener {
         public void onResponse(T response);
     }
 
-    public interface  FailuerListner {
+    public interface  FailureListener {
         public void onErrorResponse(VolleyError error);
     }
 }
