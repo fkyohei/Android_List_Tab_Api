@@ -42,8 +42,6 @@ public class MyRequest {
                 public void onResponse(JSONObject response) {
                     // 通信成功時の処理
                     ShotsParser.parseShotsList(response, category);
-                    Log.d("mylog", response.toString());
-                    Log.d("mylog", category);
                     successeListener.onResponse(response);
                 }
             },
