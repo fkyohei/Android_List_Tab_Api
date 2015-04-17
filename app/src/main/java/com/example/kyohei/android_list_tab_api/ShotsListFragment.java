@@ -85,8 +85,12 @@ public class ShotsListFragment extends ListFragment implements AbsListView.OnScr
         Log.i(TAG, "position = " + position);
         Log.i(TAG, "id = " + id);
         super.onListItemClick(l, v, position, id);
-        DetailDialogFragment detailDialogFragment = DetailDialogFragment.newInstance(mList.get(position).imageUrl);
-        detailDialogFragment.show(getFragmentManager(), TAG);
+        if(mList != null && mList.get(position) != null) {
+            DetailDialogFragment detailDialogFragment = DetailDialogFragment.newInstance(mList.get(position).imageUrl);
+            detailDialogFragment.show(getFragmentManager(), TAG);
+        } else {
+            Log.d("Mylog", "List is null");
+        }
     }
 
     @Override
@@ -120,6 +124,7 @@ public class ShotsListFragment extends ListFragment implements AbsListView.OnScr
     private List<Shots> getList() {
         if( mList == null) {
             mList = new ArrayList<Shots>();
+            addListData();
         }
         return mList;
     }

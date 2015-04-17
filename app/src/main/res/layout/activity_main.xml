@@ -20,14 +20,14 @@
         android:layout_width="match_parent"
         android:textSize="14sp"
         android:layout_height="?attr/actionBarSize"
-        android:layout_below="@id/toolbar"
-        android:background="?attr/colorPrimary"
+        android:background="@color/grey"
         app:pstsPaddingMiddle="true" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_weight="1"
         android:layout_height="0dp"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_below="@id/tabs"/>
 
 </LinearLayout>

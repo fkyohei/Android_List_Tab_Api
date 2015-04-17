@@ -110,7 +110,7 @@ public class Shots extends Model {
         return new Select()
                 .from(Shots.class)
                 .where("Category = ?", category)
-                .limit(15).offset(offset)
+                .offset(offset).limit(15)
                 .execute();
     }
 
