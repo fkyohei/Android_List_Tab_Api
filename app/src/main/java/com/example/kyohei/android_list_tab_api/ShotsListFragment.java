@@ -68,6 +68,7 @@ public class ShotsListFragment extends ListFragment implements AbsListView.OnScr
                 .MyJsonObjectRequest(getCategory(), 1, new RequestListener.SuccesseListener() {
                     @Override
                     public void onResponse(Object response) {
+                        addListData();
                         mAdapter.add(Shots.getCategoryList(mCategory, mCount));
                     }
                 }, new RequestListener.FailureListener(){
@@ -89,7 +90,7 @@ public class ShotsListFragment extends ListFragment implements AbsListView.OnScr
             DetailDialogFragment detailDialogFragment = DetailDialogFragment.newInstance(mList.get(position).imageUrl);
             detailDialogFragment.show(getFragmentManager(), TAG);
         } else {
-            Log.d("Mylog", "List is null");
+            Log.d(TAG, "List is null");
         }
     }
 
